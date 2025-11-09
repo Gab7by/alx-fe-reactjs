@@ -1,9 +1,9 @@
 const UserProfile = (props) => {
   return (
-    <div style = {{backgroundColor: 'navy', padding: '5px'}}>
-      <h2 style = {{color: 'orange'}}>User's name: {props.name}</h2>
-      <p style = {{color: 'orange'}}>Age: {props.age}</p>
-      <p style = {{color: 'orange'}}>Bio: {props.bio}</p>
+    <div style={{border: '1px solid gray', padding: '10px', margin: '10px'}}>
+      <h2 style={{color: 'blue'}}>User's name: {props.name}</h2>
+      <p>Age: <span style={{ fontWeight: 'bold' }}>{props.age}</span></p>
+      <p style = {{color: 'blue'}}>Bio: {props.bio}</p>
     </div>
   );
 };
