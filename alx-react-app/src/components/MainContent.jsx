@@ -1,9 +1,9 @@
 function MainContent() {
   return (
     <main>
-      <p>I love to visit New York, Paris, and Tokyo.</p>
+      <p style={{fontSize: '30px', color: 'navy', fontWeight: 'bold'}}>I love to visit New York, Paris, and Tokyo.</p>
     </main>
   );
 }
 
-export MainContent;
+export default MainContent;

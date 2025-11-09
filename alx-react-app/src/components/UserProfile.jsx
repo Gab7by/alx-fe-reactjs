@@ -1,9 +1,9 @@
-const = UserProfile (props) => {
+const UserProfile = (props) => {
   return (
-    <div>
-      <h2>User's name: {props.name}</h2>
-      <p>Age: {props.age}</p>
-      <p>Bio: {props.bio}</p>
+    <div style = {{backgroundColor: 'navy', padding: '5px'}}>
+      <h2 style = {{color: 'orange'}}>User's name: {props.name}</h2>
+      <p style = {{color: 'orange'}}>Age: {props.age}</p>
+      <p style = {{color: 'orange'}}>Bio: {props.bio}</p>
     </div>
   );
 };
