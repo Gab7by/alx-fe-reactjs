@@ -3,53 +3,56 @@ import { create } from "zustand";
 export const useRecipeStore = create((set) => ({
   recipes: [],
 
-  searchTerm: "",
-  filteredRecipes: [],
+  // -----------------------------
+  // FAVORITES SYSTEM
+  // -----------------------------
+  favorites: [],
 
-  setSearchTerm: (term) =>
+  addFavorite: (recipeId) =>
     set((state) => {
-      const newFiltered = state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(term.toLowerCase())
-      );
-      return {
-        searchTerm: term,
-        filteredRecipes: newFiltered,
-      };
+      if (state.favorites.includes(recipeId)) return state;
+      return { favorites: [...state.favorites, recipeId] };
     }),
 
-  filterRecipes: () =>
+  removeFavorite: (recipeId) =>
     set((state) => ({
-      filteredRecipes: state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      ),
+      favorites: state.favorites.filter((id) => id !== recipeId),
     })),
 
-  addRecipe: (newRecipe) =>
-    set((state) => {
-      const updated = [...state.recipes, newRecipe];
-      const filtered = updated.filter((r) =>
-        r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return { recipes: updated, filteredRecipes: filtered };
-    }),
+  // -----------------------------
+  // RECOMMENDATIONS SYSTEM
+  // -----------------------------
+  recommendations: [],
 
-  updateRecipe: (updatedRecipe) =>
+  generateRecommendations: () =>
     set((state) => {
-      const updated = state.recipes.map((r) =>
-        r.id === updatedRecipe.id ? { ...r, ...updatedRecipe } : r
+      // Mock recommendation logic:
+      // Recommend recipes with shared keywords in title
+      // or randomly if user has many favorites.
+      const favoriteRecipes = state.recipes.filter((r) =>
+        state.favorites.includes(r.id)
       );
-      const filtered = updated.filter((r) =>
-        r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return { recipes: updated, filteredRecipes: filtered };
-    }),
 
-  deleteRecipe: (id) =>
-    set((state) => {
-      const updated = state.recipes.filter((r) => r.id !== id);
-      const filtered = updated.filter((r) =>
-        r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      return { recipes: updated, filteredRecipes: filtered };
+      let recommended = [];
+
+      if (favoriteRecipes.length > 0) {
+        const keywords = favoriteRecipes
+          .map((r) => r.title.toLowerCase().split(" "))
+          .flat();
+
+        recommended = state.recipes.filter((recipe) => {
+          if (state.favorites.includes(recipe.id)) return false; // don’t recommend already-favorited
+          return keywords.some((word) =>
+            recipe.title.toLowerCase().includes(word)
+          );
+        });
+      }
+
+      // Fallback: random recommendations
+      if (recommended.length === 0) {
+        recommended = state.recipes.filter(() => Math.random() > 0.6);
+      }
+
+      return { recommendations: recommended };
     }),
 }));
