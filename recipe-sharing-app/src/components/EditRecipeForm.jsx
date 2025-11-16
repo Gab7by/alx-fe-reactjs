@@ -9,7 +9,7 @@ const EditRecipeForm = ({ recipe }) => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    event.preventDefault();
     if (!title.trim() || !description.trim()) return;
 
     updateRecipe({ id: recipe.id, title, description });
