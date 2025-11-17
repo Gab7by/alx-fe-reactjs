@@ -17,6 +17,21 @@ export const useRecipeStore = create((set) => ({
     })),
 
   // -----------------------------
+  // UPDATE / DELETE RECIPES
+  // -----------------------------
+  updateRecipe: (updatedRecipe) =>
+    set((state) => ({
+      recipes: state.recipes.map((r) =>
+        r.id === updatedRecipe.id ? { ...r, ...updatedRecipe } : r
+      ),
+    })),
+
+  deleteRecipe: (recipeId) =>
+    set((state) => ({
+      recipes: state.recipes.filter((r) => r.id !== recipeId),
+    })),
+
+  // -----------------------------
   // FAVORITES SYSTEM
   // -----------------------------
   favorites: [],
@@ -40,8 +55,6 @@ export const useRecipeStore = create((set) => ({
   generateRecommendations: () =>
     set((state) => {
       // Mock recommendation logic:
-      // Recommend recipes with shared keywords in title
-      // or randomly if user has many favorites.
       const favoriteRecipes = state.recipes.filter((r) =>
         state.favorites.includes(r.id)
       );
@@ -54,14 +67,13 @@ export const useRecipeStore = create((set) => ({
           .flat();
 
         recommended = state.recipes.filter((recipe) => {
-          if (state.favorites.includes(recipe.id)) return false; // don’t recommend already-favorited
+          if (state.favorites.includes(recipe.id)) return false;
           return keywords.some((word) =>
             recipe.title.toLowerCase().includes(word)
           );
         });
       }
 
-      // Fallback: random recommendations
       if (recommended.length === 0) {
         recommended = state.recipes.filter(() => Math.random() > 0.6);
       }
