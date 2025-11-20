@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Search from "./components/Search";
-import { fetchGitHubUser } from "./services/githubService";
+import { fetchUserData } from "./services/githubService";
 
 function App() {
   const [user, setUser] = useState(null);
 
   const handleSearch = async (username) => {
-    const result = await fetchGitHubUser(username);
+    const result = await fetchUserData(username);
     setUser(result);
   };
 
