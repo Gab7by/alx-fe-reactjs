@@ -50,7 +50,9 @@ const Search = () => {
       {loading && <p>Loading...</p>}
 
       {/* Error State */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && (
+        <p style={{ color: "red" }}>Looks like we cant find the user</p>
+      )}
 
       {/* Success State */}
       {user && (
