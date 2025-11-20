@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SearchBar from "./components/SearchBar";
+import Search from "./components/Search";
 import { fetchGitHubUser } from "./services/githubService";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
     <div style={{ padding: "30px" }}>
       <h1>GitHub User Search</h1>
 
-      <SearchBar onSearch={handleSearch} />
+      <Search onSearch={handleSearch} />
 
       {user ? (
         <div style={{ marginTop: "20px" }}>
