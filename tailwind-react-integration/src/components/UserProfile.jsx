@@ -1,12 +1,12 @@
 function UserProfile() {
   return (
-    <div className="rounded-lg shadow-lg bg-gray-100 p-8 md:max-w-sm max-w-xs mx-auto my-20 sm:p-4 md:p-8 ">
+    <div className="hover:shadow-xl rounded-lg shadow-lg bg-gray-100 p-8 md:max-w-sm max-w-xs mx-auto my-20 sm:p-4 md:p-8 ">
       <img
         src="https://via.placeholder.com/150"
         alt="User"
-        className="rounded-full w-36 h-36 sm:w-24 sm:h-24 md:w-36 md:h-36"
+        className="hover:scale-100 transition-transform duration-300 ease-in-out rounded-full w-36 h-36 sm:w-24 sm:h-24 md:w-36 md:h-36"
       />
-      <h1 className="text-xl text-blue-800 my-4 sm:text-lg md:text-xl">
+      <h1 className="hover:text-blue-500 text-xl text-blue-800 my-4 sm:text-lg md:text-xl">
         John Doe
       </h1>
       <p className="text-gray-600 text-base sm:text-sm md:text-base">
