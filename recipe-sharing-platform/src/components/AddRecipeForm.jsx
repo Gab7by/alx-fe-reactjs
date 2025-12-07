@@ -90,7 +90,7 @@ export default function AddRecipeForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-200"
+          className="w-full md bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-200"
         >
           Submit Recipe
         </button>
