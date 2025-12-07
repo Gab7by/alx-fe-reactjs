@@ -8,15 +8,14 @@ export default function AddRecipeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let validationErrors = {};
+    let validate = {};
 
-    if (!title.trim()) validationErrors.title = "Recipe title is required.";
-    if (!ingredients.trim())
-      validationErrors.ingredients = "Please add ingredients.";
-    if (!steps.trim()) validationErrors.steps = "Please add preparation steps.";
+    if (!title.trim()) validate.title = "Recipe title is required.";
+    if (!ingredients.trim()) validate.ingredients = "Please add ingredients.";
+    if (!steps.trim()) validate.steps = "Please add preparation steps.";
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    if (Object.keys(validate).length > 0) {
+      setErrors(validate);
       return;
     }
 
