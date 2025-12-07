@@ -20,6 +20,12 @@ export default function HomePage() {
       >
         View Recipe
       </Link>
+      <Link
+        to="/add-recipe"
+        className="inline-block mb-8 bg-green-600 text-white px-5 py-3 rounded-lg hover:bg-green-700 transition duration-200"
+      >
+        ➕ Add New Recipe
+      </Link>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {recipes.map((recipe) => (
