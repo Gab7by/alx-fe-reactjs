@@ -47,19 +47,19 @@ export default function RecipeDetail() {
       {/* Ingredients */}
       <div className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">
-          Ingredients:
+          ingredients:
         </h2>
         <ul className="list-disc ml-6 text-gray-700 space-y-1">
-          <li>Ingredient 1</li>
-          <li>Ingredient 2</li>
-          <li>Ingredient 3</li>
+          <li>ingredient 1</li>
+          <li>ingredient 2</li>
+          <li>ingredient 3</li>
         </ul>
       </div>
 
       {/* Instructions */}
       <div className="mt-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">
-          Instructions:
+          instructions:
         </h2>
         <ol className="list-decimal ml-6 text-gray-700 space-y-2">
           <li>Step 1: Lorem ipsum dolor sit amet.</li>
