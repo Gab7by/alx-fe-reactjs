@@ -1,9 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import ProfileDetails from "./pages/ProfileDetails";
-import ProfileSettings from "./pages/ProfileSettings";
+import Profile from "./components/Profile";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -22,21 +20,17 @@ const App = () => {
 
         {/* 🔐 Protected Route */}
         <Route
-          path="/profile"
+          path="/profile/*"
           element={
             <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
-        >
-          {/* 🔁 Nested Routes */}
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
+        />
 
         {/* 🔄 Dynamic Routes */}
         <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </BrowserRouter>
   );
