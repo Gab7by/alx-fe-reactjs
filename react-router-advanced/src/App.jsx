@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
@@ -10,7 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
-    <>
+    <BrowserRouter>
       <nav>
         <Link to="/">Home</Link> | <Link to="/profile">Profile</Link> |{" "}
         <Link to="/blog">Blog</Link>
@@ -38,7 +38,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:postId" element={<BlogPost />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 };
 
