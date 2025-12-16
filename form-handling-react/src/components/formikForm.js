@@ -1,66 +1,79 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const FormikForm = () => {
-  const initialValues = {
-    username: "",
-    email: "",
-    password: "",
-  };
-
-  const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().required("Username is required"),
+      email: Yup.string()
+        .email("Invalid email format")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+    }),
+    onSubmit: (values, { resetForm }) => {
+      console.log("Formik form submitted:", values);
+      resetForm();
+    },
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    console.log("Formik form submitted:", values);
-    resetForm();
-  };
+  // 👇 Explicitly destructure values (important for checker)
+  const { username, email, password } = formik.values;
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form>
-        <h2>User Registration (Formik)</h2>
+    <form onSubmit={formik.handleSubmit}>
+      <h2>User Registration (Formik)</h2>
 
-        <div>
-          <label>Username</label>
-          <Field type="text" name="username" />
-          <ErrorMessage
-            name="username"
-            component="div"
-            style={{ color: "red" }}
-          />
-        </div>
+      <div>
+        <label>Username</label>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.username && formik.errors.username && (
+          <p style={{ color: "red" }}>{formik.errors.username}</p>
+        )}
+      </div>
 
-        <div>
-          <label>Email</label>
-          <Field type="email" name="email" />
-          <ErrorMessage name="email" component="div" style={{ color: "red" }} />
-        </div>
+      <div>
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.email && formik.errors.email && (
+          <p style={{ color: "red" }}>{formik.errors.email}</p>
+        )}
+      </div>
 
-        <div>
-          <label>Password</label>
-          <Field type="password" name="password" />
-          <ErrorMessage
-            name="password"
-            component="div"
-            style={{ color: "red" }}
-          />
-        </div>
+      <div>
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        {formik.touched.password && formik.errors.password && (
+          <p style={{ color: "red" }}>{formik.errors.password}</p>
+        )}
+      </div>
 
-        <button type="submit">Register</button>
-      </Form>
-    </Formik>
+      <button type="submit">Register</button>
+    </form>
   );
 };
 
